@@ -1,0 +1,13 @@
+<form hx-post="{% url 'edit_task' pk=task.id %}"
+      hx-target="closest article"
+      hx-swap="outerHTML"
+      class="flex"
+>
+    <input type="text"
+           class="flex-1 mr-4 px-6 text-xs text-gray-900 border-0"
+           name="title"
+           value="{{ task.title }}"
+           autofocus
+    >
+    <button class="text-sky-600 hover:text-sky-900">Save</button>
+</form>

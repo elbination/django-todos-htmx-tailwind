@@ -1,0 +1,32 @@
+<form hx-put="{% url 'update_task' pk=task.id %}"
+      hx-target="this"
+      hx-swap="outerHTML"
+>
+    <article class="flex {% if task.done %}bg-green-50{% endif %}">
+        <div class="w-4/5 py-3">
+            <p hx-get="{% url 'edit_task' pk=task.id %}"
+               hx-target="this"
+               hx-swap="outerHTML"
+               class="px-6 text-xs text-gray-900"
+            >
+                {{ task.title }}
+            </p>
+        </div>
+        <div class="w-1/5 px-6 py-3 flex justify-end space-x-4">
+            {% if not task.done %}
+                <form hx-put="{% url 'update_task' pk=task.id %}"
+                      hx-target="closest article"
+                      hx-swap="outerHTML">
+                    <button class="text-sky-600 hover:text-sky-900">Done</button>
+                </form>
+            {% endif %}
+            <button
+                    hx-confirm="Are you sure?"
+                    hx-target="closest article"
+                    hx-swap="outerHTML swap:1s"
+                    hx-delete="{% url 'delete_task' pk=task.id %}"
+                    class="text-sky-600 hover:text-sky-900">Delete
+            </button>
+        </div>
+    </article>
+</form>
